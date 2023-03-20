@@ -47,3 +47,31 @@ function multiply(a:number, b:number){
     return a*b;
 }
 
+const logger = (message:string):void =>{
+    console.log(message);
+}
+
+const thowError = (message:string) :void =>{
+    if(!message){
+        throw new Error(message);
+    }
+}
+
+// Never in TypeScript
+// The Never type in TyepeScript is useful for defining a function that
+// never returns.It must always have an unreachable endpoint.
+
+//  Object Desctructuring in TypeScript
+// 
+
+const todaysWeather = {
+    temperature: 200,
+    weather: 'sunny'
+}
+
+const logWeather = (foreCast: { temperature:number, weather: string})=>{
+    console.log(foreCast.temperature);
+    console.log(foreCast.weather);
+}
+
+logWeather(todaysWeather);
