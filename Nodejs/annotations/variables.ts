@@ -40,6 +40,10 @@ const add = (a:number, b:number):number | boolean | void | string =>{
 }
 
 function divide(a:number, b:number){
+    return a/b;
+}
 
+function multiply(a:number, b:number){
+    return a*b;
 }
 
