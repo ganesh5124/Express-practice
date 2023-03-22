@@ -3,7 +3,11 @@ const data = require('./hello')
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const express = require('express');
+const app = express();
+const ejs = require('ejs');
 
+app.set('view engine', 'ejs');
 
 http.createServer((req,res)=>{
     res.write("Hello this is function");
@@ -17,6 +21,11 @@ http.createServer((req,res)=>{
     res.end();
 }).listen(3243);
 
+http.createServer((req,res)=>{
+    res.write("hello hey there");
+    res.end();
+    eventEmitters.on('click',myHandler);
+}).listen(4200);
 
 // const input = process.argv;
 // fs.writeFileSync(input[2],input[3]);
@@ -64,16 +73,7 @@ fs.appendFile(filePath,"Ok oK added some",(err,item)=>{
     console.log("64",item);
 })
 
-const express = require('express');
-const app = express();
 
-app.get('url',(req,res)=>{
-    if(url==""){
-        res.send("this is some")
-    }else if(url == "/home"){
-        res.send('Hello, this is home page')
-    }
-})
 
 // app.get('/about',(req,res)=>{
 //     res.send('Hello, this is About page')
@@ -88,3 +88,37 @@ app.get('url',(req,res)=>{
 
 app.listen(3456);
 
+var events = require('events');
+
+var eventEmitters = new events.EventEmitter();
+var myHandler = function(){
+    console.log("you just clicked");
+}
+
+eventEmitters.on('click',myHandler);
+eventEmitters.emit('click');
+
+const publicPath = path.join(__dirname, 'public');
+
+app.use(express.static(publicPath)).listen(5678);
+
+app.get('',(_, res)=>{
+    res.sendFile(`${publicPath}/index.html`)
+})
+app.get('/About',(_, res)=>{
+    res.sendFile(`${publicPath}/about.html`)
+})
+app.get('/Help',(_, res)=>{
+    res.sendFile(`${publicPath}/Help.html`)
+})
+
+app.get('*',(_, res)=>{
+    res.sendFile(`${publicPath}/404.html`)
+})
+
+
+// const views = path.join(__dirname,'views')
+
+app.get('/profile',(_, res)=>{
+    res.render('profile');
+})
