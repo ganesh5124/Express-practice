@@ -122,3 +122,12 @@ app.get('*',(_, res)=>{
 app.get('/profile',(_, res)=>{
     res.render('profile');
 })
+
+app.get('/', (req,res)=>{
+    res.send("This is Home Page")
+})
+
+app.get('/users', (req,res)=>{
+    res.send("This is Users Page")
+})
+app.listen(2347);
