@@ -6,6 +6,8 @@ const path = require('path');
 const express = require('express');
 const app = express();
 const ejs = require('ejs');
+const mysql = require('mysql');
+
 
 app.set('view engine', 'ejs');
 
@@ -131,3 +133,31 @@ app.get('/users', (req,res)=>{
     res.send("This is Users Page")
 })
 app.listen(2347);
+
+const db = mysql.createConnection({
+    host:'localhost',
+    user:'root',
+    password:'mysql123',
+    database:'nodemysql'
+})
+
+// db.connect((err)=>{
+//     if(err){
+//         throw new Error(err.message);
+//     }
+//     console.log("MySql Connected");
+// })
+
+// app.get('/createdb',(req,res)=>{
+//     let sql = "CREATE DATABASE nodemysql";
+//     db.query(sql,(err)=>{
+//         if(err){
+//             throw err;
+//         }
+//     })
+// })
+
+var request = require('request');
+request("http://www.google.com", (err, res, body) =>{
+    console.log("respobnkhkh",body);
+})
